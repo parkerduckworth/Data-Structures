@@ -1,20 +1,24 @@
 
-def quick_sort(list_):
-    quick_sort_helper(list_,0,len(list_)-1)
-    return list_
+# ========
+# In Place
+# ========
+
+def qsort_in_place(array):
+    qsort_helper(array,0,len(array)-1)
+    return array
 
 
-def quick_sort_helper(list_,first,last):
+def qsort_helper(array,first,last):
     if first < last:
 
-        splitpoint = partition(list_,first,last)
+        splitpoint = partition(array,first,last)
 
-        quick_sort_helper(list_,first,splitpoint-1)
-        quick_sort_helper(list_,splitpoint+1,last)
+        qsort_helper(array,first,splitpoint-1)
+        qsort_helper(array,splitpoint+1,last)
 
 
-def partition(list_,first,last):
-    pivot_value = list_[first]
+def partition(array,first,last):
+    pivot_value = array[first]
 
     left_pointer = first + 1
     right_pointer = last
@@ -22,21 +26,44 @@ def partition(list_,first,last):
     done = False
     while not done:
 
-        while left_pointer <= right_pointer and list_[left_pointer] <= pivot_value:
+        while left_pointer <= right_pointer and array[left_pointer] <= pivot_value:
             left_pointer += 1
 
-        while list_[right_pointer] >= pivot_value and right_pointer >= left_pointer:
+        while array[right_pointer] >= pivot_value and right_pointer >= left_pointer:
             right_pointer -= 1
 
         if right_pointer < left_pointer:
             done = True
         else:
-            temp = list_[left_pointer]
-            list_[left_pointer] = list_[right_pointer]
-            list_[right_pointer] = temp
+            temp = array[left_pointer]
+            array[left_pointer] = array[right_pointer]
+            array[right_pointer] = temp
 
-    temp = list_[first]
-    list_[first] = list_[right_pointer]
-    list_[right_pointer] = temp
+    temp = array[first]
+    array[first] = array[right_pointer]
+    array[right_pointer] = temp
 
     return right_pointer
+
+
+
+# ============================================
+# More efficient due to randomization of pivot
+# ============================================
+
+from random import randint
+
+def qsort_random_pivot(array):
+    if len(array) <= 1: return array
+    smaller, equal, larger = [], [], []
+    pivot = array[randint(0, len(array)-1)]
+
+    for x in array:
+        if x < pivot:
+            smaller.append(x)
+        elif x == pivot:
+            equal.append(x)
+        else:
+            larger.append(x)
+
+    return qsort_random_pivot(smaller) + equal + qsort_random_pivot(larger)
