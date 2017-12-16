@@ -56,7 +56,6 @@ class LinkedList:
                 this_node = this_node.get_next()
         return None
 
-
     def print_list(self):
         this_node = self.head
         L = []
