@@ -2,7 +2,8 @@
 from random import randint
 
 def quick_sort(L):
-    if len(L) <= 1: return L
+    if len(L) <= 1: 
+        return L
     smaller, equal, larger = [], [], []
     pivot = L[randint(0, len(L)-1)]
 

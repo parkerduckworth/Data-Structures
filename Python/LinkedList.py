@@ -67,3 +67,37 @@ def recur_reverse(L):
 	L.next = None
 	return res
 
+
+def delete_duplicates_unsorted(L): # for unsorted list
+	if not L or not L.next:
+		return L
+
+	curr, prev, seen = L, None, []
+	while curr:
+		if curr.data not in seen:
+			tail = curr.next
+			prev = curr
+			seen.append(curr.data)
+			curr = tail
+		else:
+			tail = curr.next
+			prev.next = tail
+			curr.next = None
+			curr = tail
+	return L
+
+
+def delete_duplicates_sorted(L): # for sorted list
+	if not L or not L.next:
+		return L
+
+	curr = L
+	while curr.next:
+		if curr.data == curr.next.data:
+			curr.next = curr.next.next
+		else:
+			curr = curr.next
+	return L
+
+
+
