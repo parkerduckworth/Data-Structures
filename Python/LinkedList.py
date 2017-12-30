@@ -49,6 +49,27 @@ class LinkedList:
             curr.next = None
 
 
+    def delete_middle(self, node):
+        if not node:
+            return
+        if node.next:
+            node.data = node.next.data
+            node.next = node.next.next
+
+
+    def print_list(self):
+        if not self.head:
+            return
+        elif not self.head.next:
+            print(self.head.data)
+        else:
+            curr, res = self.head, []
+            while curr:
+                res.append(curr.data)
+                curr = curr.next
+            print(res)
+
+
 def iter_reverse(L):
     if not L or not L.next:
         return L
@@ -83,7 +104,6 @@ def delete_duplicates_unsorted(L):  # for unsorted list
         else:
             tail = curr.next
             prev.next = tail
-            curr.next = None
             curr = tail
     return L
 
@@ -119,8 +139,15 @@ L.add(1)
 L.add(3)
 L.add(2)
 
+
+# Test kth to last element retrieval and unsorted duplicate deletion
 print(kth_to_last(L.head, 3)) # 6
-
 delete_duplicates_unsorted(L.head)
-
 print(kth_to_last(L.head, 3)) # 4
+
+
+# Test print list and middle node deletion
+L.print_list() # [2, 3, 1, 4, 6, 0]
+node = L.head.next.next.next
+L.delete_middle(node)
+L.print_list() # [2, 3, 1, 6, 0]
