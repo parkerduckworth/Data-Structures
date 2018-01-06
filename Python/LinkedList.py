@@ -8,12 +8,10 @@ class LinkedList:
     def __init__(self, head=None):
         self.head = Node(head)
 
-
     def add(self, data):
         new_node = Node(data)
         new_node.next = self.head
         self.head = new_node
-
 
     def get_position(self, position):
         curr, curr_pos = self.head, 1
@@ -25,7 +23,6 @@ class LinkedList:
                 curr_pos += 1
         return None
 
-
     def insert(self, data, position):
         new_node = Node(data)
         curr, curr_pos = self.head, 1
@@ -35,19 +32,17 @@ class LinkedList:
         new_node.next = curr.next
         curr.next = new_node
 
-
     def delete(self, data):
         curr, prev = self.head, None
         if curr.data == data:
             self.head = curr.next
             curr.next = None
         else:
-            while curr and curr.value is not data:
+            while curr and curr.dataue is not data:
                 prev = curr
                 curr = curr.next
             prev.next = curr.next
             curr.next = None
-
 
     def delete_middle(self, node):
         if not node:
@@ -56,14 +51,14 @@ class LinkedList:
             node.data = node.next.data
             node.next = node.next.next
 
-
     def print_list(self):
+        res = []
         if not self.head:
             return
         elif not self.head.next:
             print(self.head.data)
         else:
-            curr, res = self.head, []
+            curr = self.head
             while curr:
                 res.append(curr.data)
                 curr = curr.next
@@ -141,13 +136,13 @@ L.add(2)
 
 
 # Test kth to last element retrieval and unsorted duplicate deletion
-print(kth_to_last(L.head, 3)) # 6
+print(kth_to_last(L.head, 3))  # 6
 delete_duplicates_unsorted(L.head)
-print(kth_to_last(L.head, 3)) # 4
+print(kth_to_last(L.head, 3))  # 4
 
 
-# Test print list and middle node deletion
-L.print_list() # [2, 3, 1, 4, 6, 0]
+# # Test print list and middle node deletion
+L.print_list()  # [2, 3, 1, 4, 6, 0]
 node = L.head.next.next.next
 L.delete_middle(node)
-L.print_list() # [2, 3, 1, 6, 0]
+L.print_list()  # [2, 3, 1, 6, 0]
