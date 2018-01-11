@@ -56,9 +56,9 @@ def zero_matrix(M):
             indices += [i for i, x in enumerate(row) if x == 0]
             for i in range(len(row)):
                 row[i] = 0
-    for each in M:
+    for row in M:
         for i in indices:
-            each[i] = 0
+            row[i] = 0
     return M
 
 
