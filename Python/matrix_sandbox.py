@@ -52,10 +52,10 @@ def transpose_rotation(M):
 def zero_matrix(M):
     indices = []
     for row in M:
+        replace = M.index(row)
         if 0 in row:
             indices += [i for i, x in enumerate(row) if x == 0]
-            for i in range(len(row)):
-                row[i] = 0
+            M[replace] = [0] * len(row)
     for row in M:
         for i in indices:
             row[i] = 0
