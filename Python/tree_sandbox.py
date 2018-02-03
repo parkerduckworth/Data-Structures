@@ -24,16 +24,6 @@ def postOrder(root):
         postOrder(root.left)
         postOrder(root.right)
         print(root.data, end=' ')
-    
-
-def list_to_bst(arr):
-    if not len(arr):
-        return None
-    mid = len(arr) // 2
-    root = TreeNode(arr[mid])
-    root.left = list_to_bst(arr[ : mid])
-    root.right = list_to_bst(arr[mid + 1 : ])
-    return root
 
 
 def find_min_iter(root):
@@ -66,6 +56,16 @@ def find_max_recur(root):
     elif not root.right:
         return root.data
     return find_max_iter(root.right)
+
+
+def list_to_bst(arr):
+    if not len(arr):
+        return None
+    mid = len(arr) // 2
+    root = TreeNode(arr[mid])
+    root.left = list_to_bst(arr[ : mid])
+    root.right = list_to_bst(arr[mid + 1 : ])
+    return root
 
 
 def find_height(root):
