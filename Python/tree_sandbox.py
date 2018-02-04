@@ -78,11 +78,21 @@ def is_balanced(root):
     if not root:
         return True
     return (abs(find_height(root.left) - find_height(root.right)) <= 1) \
-            and is_balanced(root.left) and is_balanced(root.right)    
+            and is_balanced(root.left) and is_balanced(root.right)   
+
+
+def merge_trees(root1, root2):
+    if not root1 or not root2:
+        return root1 or root2
+    else:
+        root1.data += root2.data
+        root1.left = merge_trees(root1.left, root2.left)
+        root1.right = merge_trees(root1.right, root2.right)
+    return root1
          
 
 arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-root = list_to_bst(arr)
+root1 = list_to_bst(arr)
 
 a = TreeNode(1)
 b, c, d = TreeNode(2), TreeNode(3), TreeNode(4)
@@ -91,5 +101,14 @@ e, f, g = TreeNode(5), TreeNode(6), TreeNode(7)
 root2 = a
 a.left, a.right, b.left, c.left, e.left, e.right = b, e, c, d, f, g
 
-print(is_balanced(root))     # True
+print(is_balanced(root1))    # True
 print(is_balanced(root2))    # False
+
+
+inOrder(root1)
+# 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+inOrder(root2)
+# 4, 3, 2, 1, 6, 5, 7
+inOrder(merge_trees(root1, root2))
+# 5, 5, 5, 4, 5, 7, 7, 14, 14, 17
+
