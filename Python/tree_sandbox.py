@@ -5,27 +5,44 @@ class TreeNode:
         self.right = right
 
 
-def inOrder(root):
+###### Traversal Methods ######
+def in_order(root):
     if root:
-        inOrder(root.left)
+        in_order(root.left)
         print(root.data, end=' ')
-        inOrder(root.right)
+        in_order(root.right)
 
 
-def preOrder(root):
+def pre_order(root):
     if root:
         print(root.data, end=' ')
-        preOrder(root.left)
-        preOrder(root.right)
+        pre_order(root.left)
+        pre_order(root.right)
 
 
-def postOrder(root):
+def post_order(root):
     if root:
-        postOrder(root.left)
-        postOrder(root.right)
+        post_order(root.left)
+        post_order(root.right)
         print(root.data, end=' ')
 
 
+def level_order(root):
+    if not root:
+        return
+    Q = []
+    Q.append(root)
+    while Q:
+        curr = Q[0]
+        print(curr.data, end=' ')
+        if curr.left:
+            Q.append(curr.left)
+        if curr.right:
+            Q.append(curr.right)
+        Q.pop(0)
+
+
+###### Find Min/Max Data ######
 def find_min_iter(root):
     if not root:
         return None
@@ -58,6 +75,7 @@ def find_max_recur(root):
     return find_max_iter(root.right)
 
 
+###### Convert List to Binary Search Tree ######
 def list_to_bst(arr):
     if not len(arr):
         return None
@@ -68,12 +86,14 @@ def list_to_bst(arr):
     return root
 
 
+###### Find Height/Max Depth ######
 def find_height(root):
     if not root:
         return -1
     return max(find_height(root.left), find_height(root.left)) + 1
 
 
+###### Determine Balance ######
 def is_balanced(root):
     if not root:
         return True
@@ -81,6 +101,7 @@ def is_balanced(root):
             and is_balanced(root.left) and is_balanced(root.right)   
 
 
+###### Merge Non-Null Nodes ######
 def merge_trees(root1, root2):
     if not root1 or not root2:
         return root1 or root2
@@ -105,10 +126,9 @@ print(is_balanced(root1))    # True
 print(is_balanced(root2))    # False
 
 
-inOrder(root1)
+in_order(root1)
 # 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-inOrder(root2)
+in_order(root2)
 # 4, 3, 2, 1, 6, 5, 7
-inOrder(merge_trees(root1, root2))
+in_order(merge_trees(root1, root2))
 # 5, 5, 5, 4, 5, 7, 7, 14, 14, 17
-
