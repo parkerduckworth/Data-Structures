@@ -112,6 +112,7 @@ def merge_trees(root1, root2):
     return root1
          
 
+###### Tests ######
 arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 root1 = list_to_bst(arr)
 
